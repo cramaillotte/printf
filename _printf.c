@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "main.h"
 
 /**
  * _printf - main function
@@ -34,6 +34,21 @@ int _printf(const char *format, ...)
 					break;
 				case '%':
 					print_percent(&counter);
+					break;
+				case 'r':
+					format++;
+					print_char('%', &counter);
+					print_char('r', &counter);
+					if (*format != '\0')
+					{
+						print_char('[', &counter);
+						print_char(*format, &counter);
+						print_char(']', &counter);
+					}
+					break;
+				default:
+					print_char('%', &counter);
+					print_char(*format, &counter);
 					break;
 			}
 		}

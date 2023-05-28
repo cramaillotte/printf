@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "main.h"
 
 /**
  * print_char - helper function
@@ -41,4 +41,23 @@ int print_percent(int *counter)
 	_putchar('%');
 	(*counter)++;
 	return (0);
+}
+
+/**
+ * print_unknown - print unknown format specifer
+ * @format: format string
+ * @counter: pointer to counter
+ */
+
+void print_unknown(const char *format, int *counter)
+{
+	print_char('%', counter);
+	print_char(*format, counter);
+
+	if (*format != '\0')
+	{
+		print_char('[', counter);
+		print_string(format, counter);
+		print_char(']', counter);
+	}
 }

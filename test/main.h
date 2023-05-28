@@ -15,7 +15,7 @@ int _strlen(char *s);
 int print_char(char ch, int *counter);
 int print_percent(int *counter);
 int print_string(const char *str, int *counter);
-void print_unknown(const char *format, int *counter);
+
 
 /* main source code file _printf */
 int _printf(const char *format, ...);
