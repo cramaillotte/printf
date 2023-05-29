@@ -17,6 +17,5 @@ int _pputs(char *s)
 	}
 
 	_putchar('\n');
-	
 	return (0);
 }

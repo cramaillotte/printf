@@ -6,8 +6,8 @@
  * @c: counter
  * Return: 0
  */
- 
-int print_char(char ch, int *c)
+
+int _print_char(char ch, int *c)
 {
 	_putchar(ch);
 	(*c)++;
