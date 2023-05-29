@@ -1,26 +1,26 @@
-#ifndef PRINTF_H
-#define PRINTF_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <string.h>
 
-/* helper functions puts puchar and strlen */
-int _putchar(char c);
-int _puts_helper(char *str);
+/* helper functions _pputs _putchar and _strlen */
+int _putchar(char ch);
+int _pputs(char *s);
 int _strlen(char *s);
 
-/* task 0 c % s */
-int print_char(char ch, int *counter);
-int print_percent(int *counter);
-int print_string(const char *str, int *counter);
-void process_char(char ch, int *counter);
-void process_string(const char *str, int *counter);
-void process_percent(int *counter);
-void print_unknown(const char *format, int *counter);
+
+
+/* task 0 specfiers: c, %, s */
+int _print_char(char ch, int *c);
+int _print_percent(int *c);
+int _print_string(char *s, int *c);
+
+
 
 /* main source code file _printf */
 int _printf(const char *format, ...);
 
-#endif /* PRINTF_H */
+#endif /* MAIN_H */
