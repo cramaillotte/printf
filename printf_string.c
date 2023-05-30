@@ -1,8 +1,8 @@
 #include "main.h"
 /**
- * printf_string - print a string.
- * @val: argumen t.
- * Return: the length of the string.
+ * printf_string - prints string
+ * @val: arg
+ * Return: length of string
  */
 
 int printf_string(va_list val)

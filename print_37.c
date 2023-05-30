@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * printf_37 - prints the char 37.
- * Return: 1.
+ * printf_37 - prints 37
+ * Return: 1 Always
  */
 int printf_37(void)
 {
