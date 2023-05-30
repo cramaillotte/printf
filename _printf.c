@@ -8,40 +8,75 @@
 
 int _printf(const char *format, ...)
 {
-	int c = 0;
-	char ch, *s;
-	va_list args;
+	int i = 0, buf_i = 0, c = 0;
+	char buf[1024];
+	va_list a;
 	
-	va_start(args, format);
-	while (*format)
+	va_start(a, format);
+	if (format == NULL || (format[i] == '%' && format[i + 1] == '\0'))
+		return (-1);
+
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			switch (*format)
+			i++;
+			switch (format[i])
 			{
 				case 'c':
-					ch = (char)va_arg(args, int);
-					_print_char(ch, &c);
+					buf_i = _print_char(&buf[buf_i], buf_i, c, &c);
 					break;
 				case 's':
-					s = va_arg(args, char *);
-					_print_string(s, &c);
+					buf_i = _print_string(&buf[buf_i], &c);
 					break;
 				case '%':
-					_print_percent(&c);
+					buf_i = _print_percent(&c);
+					break;
+				case 'i':
+				case 'd':
+					buf_i = _print_int(&buf[buf_i], buf_i, c, &c);
+					break;
+				case 'b':
+					buf_i = _print_binary(&buf[buf_i], buf_i, va_arg(a, unsigned int), &c);
+					break;
+				case 'u':
+				case 'o':
+				case 'x':
+				case 'X':
+					buf_i = _print_unsigned(&buf[buf_i], buf_i, va_arg(a, unsigned int), 10, 0, &c);
+					break;
+				case 'S':
+					buf_i = _print_non_string(&buf[buf_i], buf_i, va_arg(a, char *), &c);
+					break;
+				case 'p':
+					buf_i = _print_pointer(&buf[buf_i], buf_i, va_arg(a, void *), &c);
+					break;
+				case 'r':
+					buf_i = _print_reversed(&buf[buf_i]);
 					break;
 				default:
-					/* unknown */
+					buf_i = _print_percent(&c);
 					break;
 			}
 		}
 		else
 		{
-			_print_char(*format, &c);
+			if (buf_i == 1024)
+			{
+				write (1, buf, buf_i);
+				c += buf_i;
+				buf_i = 0;
+			}
+
+			buf[buf_i++] = format[i];
 		}
-		format++;
+		i++;
 	}
-	va_end(args);
+	if (buf_i > 0)
+	{
+		write(1, buf, buf_i);
+		c += buf_i;
+	}
+	va_end(a);
 	return (c);
 }
